@@ -5,3 +5,7 @@ config:
   pulumi-azure-labs:sshSource: '*'
   pulumi-azure-labs:sshPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEjIMkt2qjTCJLiTVcRS8xs9gAPiS2g1pYq62+FQjZIE azadmin15@SandboxHost-639304947609543923
   pulumi-azure-labs:vmSize: Standard_B1s
+  pulumi-azure-labs:dbPassword:
+    secure: v1:HRsd+QenO4gHfuRk:J1xjPWoR2TwF3UHM0qhOi5Hws3DupcQ62CM6
+  pulumi-azure-labs:storageAccountName: stlabsr001
+  pulumi-azure-labs:deployVm: "true"

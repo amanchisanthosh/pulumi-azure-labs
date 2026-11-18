@@ -4,14 +4,19 @@ import pulumi_azure_native as azure_native
 
 def create_network(resource_group):
     config = pulumi.Config()
+    prefix = config.get("vnetPrefix") or "10.0"
 
     # ---- Part A goes here ----
     # Exercise 2: VNet CIDR from config, with a default
-    vnet_cidr = config.get("vnetCidr") or "10.0.0.0/16"
-
-    web_cidr = "10.0.1.0/24"
-    app_cidr = "10.0.2.0/24"
-    db_cidr = "10.0.3.0/24"
+    vnet_cidr = config.get("vnetCidr") or f"{prefix}.0.0/16"
+    web_cidr = f"{prefix}.1.0/24"
+    app_cidr = f"{prefix}.2.0/24"
+    db_cidr = f"{prefix}.3.0/24"
+    
+    #vnet_cidr = config.get("vnetCidr") or "10.0.0.0/16"
+    #web_cidr = "10.0.1.0/24"
+    #app_cidr = "10.0.2.0/24"
+    #db_cidr = "10.0.3.0/24"
 
     vnet = azure_native.network.VirtualNetwork(
         "vnet",
@@ -114,5 +119,6 @@ def create_network(resource_group):
         ),
         opts=pulumi.ResourceOptions(depends_on=[app_subnet]),
     )
+
 
     return vnet, web_subnet, app_subnet, db_subnet
